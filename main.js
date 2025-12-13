@@ -108,4 +108,66 @@ function generarReporteNomina() {
   console.log(`COSTO TOTAL DE NÓMINA: $${costoTotalNomina.toFixed(2)}`);
 }
 
+// SEGUIR AGREGANDO EMPLEADOS
+let seguirAgregando = true;
+
+function solicitarDatosEmpleado() {
+  let nuevoNombre = prompt("Ingrese el Nombre y Apellido del nuevo empleado");
+  let sueldoIngresado = 0;
+  do {
+    let sueldoNumero;
+    sueldoNumero = prompt(
+      "Ingresa el sueldo del nuevo empleado (valor numérico mayor a 0)."
+    );
+    sueldoIngresado = Number(sueldoNumero);
+  } while (isNaN(sueldoIngresado) || sueldoIngresado <= 0);
+
+  let modalidadIngresada = "";
+  let validarModalidad;
+  do {
+    validarModalidad = Number(
+      prompt(
+        "Digite el número que corresponda a la modalidad del nuevo empleado. \nPresencial - 1 \nVirtual - 2 \nHíbrido - 3"
+      )
+    );
+
+    if (validarModalidad === 1) {
+      modalidadIngresada = "presencial";
+    } else if (validarModalidad === 2) {
+      modalidadIngresada = "virtual";
+    } else if (validarModalidad === 3) {
+      modalidadIngresada = "híbrido";
+    } else {
+      alert("El valor ingresado es incorrecto, inténtelo nuevamente");
+    }
+  } while (
+    isNaN(validarModalidad) ||
+    validarModalidad <= 0 ||
+    validarModalidad > 3
+  );
+
+  let contratoIngresado = confirm(
+    "¿El empleado tendrá contrato indefinido? \n1. Sí - Aceptar \n2. No - Cancelar"
+  );
+
+  alert(
+    ingresarNuevoEmpleado(
+      nuevoNombre,
+      sueldoIngresado,
+      modalidadIngresada,
+      contratoIngresado
+    )
+  );
+}
+
+// DESEA CONTINUAR AGREGANDO
+let continuar = confirm(
+  "¿Desea iniciar la carga de un nuevo empleado al sistema?"
+);
+while (continuar) {
+  solicitarDatosEmpleado();
+
+  continuar = confirm("¿Quiere ingresar otro empleado?");
+}
+
 generarReporteNomina();
