@@ -16,7 +16,6 @@ let modalidadTrabajo = [
 ];
 let contratoIndefinido = [true, false, true, false, true];
 
-
 // FUNCIÓN AGREGAR NUEVO EMPLEADO EN LA BASE
 function ingresarNuevoEmpleado(nombre, sueldo, modalidad, tipoContrato) {
   nombresEmpleados.push(nombre);
@@ -25,7 +24,6 @@ function ingresarNuevoEmpleado(nombre, sueldo, modalidad, tipoContrato) {
   contratoIndefinido.push(tipoContrato);
   return `El empleado ${nombre} fue agregado exitosamente.`;
 }
-
 
 // SOLICITUD DE DATOS PARA NUEVO EMPLEADO
 let nuevoNombre = prompt("Ingrese el Nombre y Apellido del nuevo empleado");
@@ -75,23 +73,17 @@ alert(
   )
 );
 
-
 // VALIDACION DE DATOS AGREGADOS
 console.log(nombresEmpleados[nombresEmpleados.length - 1]);
 console.log(sueldosBrutos[sueldosBrutos.length - 1]);
 console.log(modalidadTrabajo[modalidadTrabajo.length - 1]);
 console.log(contratoIndefinido[contratoIndefinido.length - 1]);
 
-
 // CALCULAR SUELDO NETO ULTIMO TRABAJADOR INGRESADO
 function calcularSueldoNeto(sueldo, modalidad) {
   let resultado = sueldo;
   if (resultado > 2000) {
     resultado = resultado * 0.92;
-    console.log(
-      "Se descontó el 8% de retención de 5ta categoría, el sueldo a recibir es: " +
-        resultado
-    );
   }
   if (modalidad === "presencial") {
     resultado += 150;
@@ -102,4 +94,18 @@ function calcularSueldoNeto(sueldo, modalidad) {
   return resultado;
 }
 
-alert(calcularSueldoNeto(sueldoIngresado, modalidadIngresada));
+// REPORTE DE NÓMINA
+function generarReporteNomina() {
+  let costoTotalNomina = 0;
+  for (let i = 0; i < nombresEmpleados.length; i++) {
+    let neto = calcularSueldoNeto(sueldosBrutos[i], modalidadTrabajo[i]);
+    costoTotalNomina += neto;
+    console.log(
+      `- Empleado: ${nombresEmpleados[i]} | Sueldo Neto: $${neto.toFixed(2)}`
+    );
+  }
+
+  console.log(`COSTO TOTAL DE NÓMINA: $${costoTotalNomina.toFixed(2)}`);
+}
+
+generarReporteNomina();
