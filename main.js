@@ -81,12 +81,9 @@ function solicitarDatosEmpleado() {
     )
   );
 }
-solicitarDatosEmpleado();
 
-// DESEA CONTINUAR AGREGANDO
-let continuar = confirm(
-  "¿Desea iniciar la carga de un nuevo empleado al sistema?"
-);
+let continuar = true;
+
 while (continuar) {
   solicitarDatosEmpleado();
   continuar = confirm("¿Quiere ingresar otro empleado?");
